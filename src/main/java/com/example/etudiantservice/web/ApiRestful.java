@@ -24,14 +24,14 @@ import java.util.Map;
 @OpenAPIDefinition(
         info = @Info(
                 title = "Etudiant Service API",
-                version = "1.0.0",
+                version = "2.0.0",
                 description = "CRUD des étudiants + enrichissement filière via Feign"
         ),
-        servers = @Server(url = "http://localhost:8082/")
+        servers = @Server(url = "http://localhost:8085/")
 )
 
 @RestController
-@RequestMapping("/v1/etudiants")
+@RequestMapping("/v2/etudiants")
 @RequiredArgsConstructor
 public class ApiRestful {
 

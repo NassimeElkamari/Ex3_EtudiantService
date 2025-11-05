@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(name = "filieres", url = "${filiereservice.url}")
 public interface FiliereClient {
-    @GetMapping("/v1/filieres/{id}")
+    @GetMapping("/v2/filieres/{id}")
     FiliereDto getFiliere(@PathVariable("id") Long id);
 }
