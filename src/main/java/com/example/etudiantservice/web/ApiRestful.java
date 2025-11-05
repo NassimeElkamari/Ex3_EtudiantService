@@ -15,6 +15,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -46,6 +47,7 @@ public class ApiRestful {
                     @ApiResponse(responseCode = "400", description = "Requête invalide")
             }
     )
+    @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
     @PostMapping
     public ResponseEntity<Map<String, Object>> create(@Valid @RequestBody RequestDtoEtudiant dto) {
         ResponseDtoEtudiant saved = service.save(dto);
@@ -61,6 +63,7 @@ public class ApiRestful {
             summary = "Lister les étudiants",
             description = "Retourne tous les étudiants enregistrés"
     )
+    @PreAuthorize("hasAuthority('SCOPE_USER')")
     @GetMapping
     public ResponseEntity<Map<String, Object>> all() {
         List<ResponseDtoEtudiant> list = service.findAll();
@@ -75,6 +78,7 @@ public class ApiRestful {
             summary = "Obtenir un étudiant par id",
             description = "Retourne un étudiant enrichi avec sa filière (si existante)"
     )
+    @PreAuthorize("hasAuthority('SCOPE_USER')")
     @GetMapping(value = "/{id}")
     public ResponseEntity<EtudiantDetailsDto> byId(@PathVariable Long id) {
         return ResponseEntity.ok(service.findById(id));
@@ -85,6 +89,7 @@ public class ApiRestful {
             summary = "Mettre à jour un étudiant",
             description = "Modifie les informations d'un étudiant existant"
     )
+    @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
     @PutMapping(value = "/{id}")
     public ResponseEntity<Map<String, Object>> update(@PathVariable Long id, @Valid @RequestBody RequestDtoEtudiant dto) {
         ResponseDtoEtudiant updated = service.update(id, dto);
@@ -99,6 +104,7 @@ public class ApiRestful {
             summary = "Supprimer un étudiant",
             description = "Supprime définitivement un étudiant par son identifiant"
     )
+    @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Map<String, Object>> delete(@PathVariable Long id) {
         service.delete(id);

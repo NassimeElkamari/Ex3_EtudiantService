@@ -1,0 +1,17 @@
+{
+  "groups": [
+    {
+      "name": "rsa",
+      "type": "com.example.etudiantservice.configuration.RsaKeys",
+      "sourceType": "com.example.etudiantservice.configuration.RsaKeys"
+    }
+  ],
+  "properties": [
+    {
+      "name": "rsa.public-key",
+      "type": "java.security.interfaces.RSAPublicKey",
+      "sourceType": "com.example.etudiantservice.configuration.RsaKeys"
+    }
+  ],
+  "hints": []
+}
